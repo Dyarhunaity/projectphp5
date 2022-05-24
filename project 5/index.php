@@ -1,7 +1,16 @@
 <?php include 'config/connect.php';
-session_start();
-include 'include/header.php'; ?>
+session_start();?>
+<?php include 'config/config.php';
+$sql = "SELECT * from products p;";
+$handle = $db->prepare($sql);
+$handle->execute();
+$getAllProducts = $handle->fetchAll(PDO::FETCH_ASSOC);
 
+if (isset($_POST['singalProduct'])) {
+    $_SESSION['product_id']=$_POST['id_value'];
+    header('location: single-product.php');
+}
+include 'include/header.php'; ?>
 <section class="slider_section">
     <div class="banner_main header-bg">
         <div class="container-fluid">
@@ -100,7 +109,7 @@ include 'include/header.php'; ?>
                     <div class="row">
                         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
                             <div class="img_bg">
-                                <h3 id="">50% DISCOUNT<br> <strong class="black_nolmal">the latest collection</strong></h3>
+                                <h3 id="">Up To 10% DISCOUNT<br> <strong class="black_nolmal">the latest collection</strong></h3>
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
@@ -154,8 +163,43 @@ include 'include/header.php'; ?>
     </div>
     <!-- </div> -->
 </div>
-<br><br>
+<br>
+<!--start sale show-->
+<div class="container">
+<div class="row">
 
+<?php foreach($getAllProducts as $product): ?>
+<?php    $imgUrl =$product['image'];
+
+    if ($product['sale'] == 1 && $product['id'] <= 10){
+
+     echo "<div class='col-md-4  mt-2'>
+                <div class='card prodheigh'>
+                     <a href='single-product.php?product=".$product['id']."'>
+                        <img class='card-img-top' src='".$imgUrl."' alt='".$product['pname']."'>
+                    </a>
+                    <div class='card-body'>
+                        <h5 class='card-title'>
+                            <a href='single-product.php?product=".$product['id']."'>
+                                ".$product['pname']."
+                            </a>
+                            </h5><span class='product_price'>JD".$product['new_price']."</span>
+                                <span class ='old-price' STYLE='text-decoration:line-through'>JD".$product['price']."</span>
+                                <p class='card-text'>
+                            <a href='single-product.php?product=".$product['id']."' class='btn btn-primary btn-sm'>
+                                View
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>";
+    }
+?>
+<?php endforeach; ?>
+</div>
+</div>
+<br><br>
+<!-- End sale show -->
 <!-- end discount -->
 
 <!-- 

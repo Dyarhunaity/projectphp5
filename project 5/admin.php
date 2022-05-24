@@ -1,17 +1,6 @@
 <?php
 include 'config/connect.php';
 
-if(isset($_POST["submit_img"])){
-    $file_name = $_FILES["file"]["name"];
-    $file_type = $_FILES["file"]["type"];
-    $file_size = $_FILES["file"]["size"];
-    $file_tem = $_FILES["file"]["tmp_name"];
-    $file_store = "images/".$file_name;
-    // echo $file_store;
-    move_uploaded_file($file_tem, $file_store);
-}
-
-
 //call the user information from database
 $users=mysqli_fetch_all(mysqli_query($conn,'select * from users'),MYSQLI_ASSOC);
 
@@ -23,6 +12,10 @@ $sales=mysqli_fetch_all(mysqli_query($conn,'select * from sales'),MYSQLI_ASSOC);
 
 // call the category informations from database
 $category=mysqli_fetch_all(mysqli_query($conn,'select * from category'),MYSQLI_ASSOC);
+
+// call the category ID from database
+// $category_ID=mysqli_fetch_column((mysqli_result $category, int $column = 0));
+// print_r($category_ID);
 
 
 // Form Display Default state
@@ -144,7 +137,7 @@ if (isset($_POST['addUserSubmit'])) {
     $creatat=date('d-m-Y');
     $updateat=date('d-m-Y');
 
-$sql="INSERT INTO users (fname,email,phone,Pass,created_at,updated_at) VALUES ('$newName','$newEmail','$newPhone','$newPass','$creatat','$updateat';";
+$sql="INSERT INTO users (fname,email,phone,Pass,created_at,updated_at) VALUES ('$newName','$newEmail','$newPhone','$newPass','$creatat','$updateat');";
 mysqli_query($conn,$sql);
 }
 
@@ -154,17 +147,19 @@ if (isset($_POST['addProductSub'])) {
     $baF="none";
 }
 if (isset($_POST['addProductSubmit'])) {
-
+    $file_name = $_FILES["file"]["name"];
+    $file_type = $_FILES["file"]["type"];
+    $file_size = $_FILES["file"]["size"];
+    $file_tem = $_FILES["file"]["tmp_name"];
+    $file_store = "images/".$file_name;
+    move_uploaded_file($file_tem, $file_store);
     $newName=$_POST['productAddName'];
     $newCategory=$_POST['productAddCategory'];
-    $newImage=$_POST['productAddImage'];
     $newPrice=$_POST['productAddPrice'];
     $newQuantity=$_POST['productAddQuantity'];
-    $creatat=date('d-m-Y');
-    $updateat=date('d-m-Y');
-
-$sql="INSERT INTO products (pname,image,categoryname,price,quantity,created_at,updated_at) VALUES ('$newName','$newImage','$newCategory','$newPrice','$newQuantity','$creatat','$updateat';";
-mysqli_query($conn,$sql);
+     echo $newName.$newCategory.$newPrice.$newQuantity;
+$sqla="INSERT INTO `products` (pname,category_id,image,price,quantity) VALUES ('$newName','$newCategory','$file_store','$newPrice','$newQuantity');";
+mysqli_query($conn,$sqla);
 }
 
 // Category add functions
@@ -173,8 +168,6 @@ if (isset($_POST['addCatSub'])) {
 }
 if (isset($_POST['addCatSubmit'])) {
     $newName=$_POST['catAddName'];
-    // $creatat=date('d-m-Y');
-    // $updateat=date('d-m-Y');
 $sql="INSERT INTO category (categoryname) VALUES ('$newName');";
 mysqli_query($conn,$sql);
 echo $newName;
@@ -182,28 +175,186 @@ echo $newName;
 
 
 //////////////////////End Of Add Functions/////////////////////////
-
-
-
-
-
-
-
-
-include 'include/header.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Luxury Furniture</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style2.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- font-awesome -->
+    <script src="https://kit.fontawesome.com/4a27207296.js" crossorigin="anonymous"></script>
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+</head>
+<!-- body -->
+
+<body class="main-layout ">
+
+    <!-- loader  -->
+    <!-- <div class="loader_bg">
+        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+    </div> -->
+    <!-- end loader -->
+
+    <div class="wrapper ">
+
+
+ 
+        <div id="content">
+            <!-- header -->
+            <header>
+                <!-- header inner -->
+                <div class="header header-bg">
+
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-md-3 logo_section">
+                                <div class="full">
+                                    <div class="center-desk">
+                                        <div class="logo">
+                                            <a href="index.php"><img src="images/logo.png" alt="#"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="right_header_info">
+                                    <ul>
+                                        <li style="display:<?php echo $uss; ?> ;"><a href="index.php"><i class="fa-solid fa-person-walking-arrow-right fa-lg basket-icon"></i></i></a>
+                                        </li>
+
+                                        <!-- <li>
+                                            <button type="button" id="sidebarCollapse">
+                                                <img src="images/menu_icon.png" alt="#" />
+                                                <i class="fa-solid fa-bars menu-icon"></i>
+                                            </button>
+                                        </li> -->
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end header inner -->
+            </header>
+            <!-- end header -->
+
+
+
+<!-- ///////////////////////////////////////////////// -->
+<!-- ////////////////////chooose table function//////////////// -->
+<!-- //////////////////////////////////////////////// -->
+
+<div class="col-md-12 col-lg-12 col-xl-12 offset-md-3">
+    <form action="admin.php" method="POST" >
+        <select name="tables" class="form-control col-4" id="" style="height:10vh ; display: inline-block; ">
+            <option value="usersTable">Users Table</option>
+            <option value="productsTable">Products Table</option>
+            <option value="categoriesTable">Categories Table</option>
+            <option value="salesTable">Sales Table</option>
+        </select>
+        <button class="btn btn-success " name="select" type="submit" style="margin-left: .75em;">Select</button>
+    </form>
+</div>
+
+
+<?php 
+
+// tables display 
+$ctF=$utF=$ptF=$stF="none";
+if (isset($_POST['select'])) {
+switch ($_POST['tables']) {
+    case 'usersTable':
+        $utF="block";
+        break;
+    
+    case 'productsTable':
+        $ptF="block";
+        break;
+    
+    case 'categoriesTable':
+            $ctF="block";
+        break;
+
+    case 'salesTable':
+            $stF="block";
+        break;
+                        
+    default:
+    $ctF=$utF=$ptF=$stF="none";
+        break;
+}
+}
+?>
+
+
+
 <!-- /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////USERS////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-<!-- Users Information Table -->
 
-<form action="admin.php" method="POST">
-<h1>Users Information</h1>
-<button class="btn bg-secondary" type="submit" name="addUserSub">Add User</button>
+
+<!-- add user button -->
+<div class="container row">
+<div class="col-3 offset-3">
+<form action="admin.php" method="POST" >
+<button class="btn bg-info" type="submit" name="addUserSub">Add User</button>
 </form>
+</div>
+
+
+<!-- add product button -->
+<div class="col-3">
+<form action="admin.php" method="POST">
+<button class="btn bg-info" type="submit" name="addProductSub">Add Product</button>
+</form>
+</div>
+<!-- add category button -->
+<div class="col-3">
+<form action="admin.php" method="POST" >
+<button class="btn bg-info" type="submit" name="addCatSub">Add Category</button>
+</form>
+</div>
+</div>
 <br>
-<table class="table" >
+
+
+<!-- Users Information Table -->
+<div class="container">
+<table class="table" style="display:<?php echo $utF; ?> ;">
+<h1 style="display:<?php echo $utF; ?> ;">Users Information</h1>
     <tr class='bg-active' style="background-color:pink;">
         <td>ID</td>
         <td>Name</td>
@@ -248,10 +399,9 @@ include 'include/header.php';
         <?php endforeach; ?>
     
 </table>
+</div>
 <!-- End Of Users Information Table -->
 
-
-<br><br>
 
 <!-- Update User Info Form -->
 <form class="container" action="admin.php" method="POST" style="display:<?php echo $uF; ?> ;">
@@ -308,33 +458,24 @@ include 'include/header.php';
 </form>
 <!-- End Of Add User Form -->
 
-<br><br>
 
 <!-- /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////Products////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-<!-- add product button -->
-<form action="admin.php" method="POST">
-<h1>Products Information</h1>
-<button class="btn bg-secondary" type="submit" name="addProductSub" style="display:<?php echo $baF; ?> ;">Add Product</button>
-</form>
+
 
 <!-- Add Product Form -->
-<form action="admin.php" method="POST" class="container" style="display:<?php echo $paF; ?> ;">
+<form action="admin.php" method="POST" class="container" enctype="multipart/form-data" style="display:<?php echo $paF; ?> ;">
 <div class="form-row">
     <div class="form-group col-md-2">
     <label for="paname">product Name</label>
     <input type="text" id='paname' name="productAddName" placeholder="name">
     </div>
-    <div class="form-group col-md-2">
-    <label for="paCate">Product Category</label>
-    <input type="text" id='paCate' name="productAddCategory" placeholder="Category">
+    <div class="form-group col-md-3 ">
+    <label for="paimg">Product Image</label>
+    <input type="file" name="file" id="file">
     </div>
-    <!-- <div class="form-group col-md-3 ">
-    <label for="paimg">Product Image</label> -->
-    <input type="hidden" id='paimg' name="productAddImage" placeholder="Image" value="<?php $file_store ?>">
-    <!-- </div> -->
     <div class="form-group col-md-2 ">
     <label for="paprice">Product Price</label>
     <input type="text" id='paprice' name="productAddPrice" placeholder="Price">
@@ -343,27 +484,31 @@ include 'include/header.php';
     <label for="paquantity">Product Quantity</label>
     <input type="text" id='paquantity' name="productAddQuantity" placeholder="Quantity">
     </div>
+    <div class="form-group col-md-2">
+    <label for="paCate">Product Category</label>
+    <select id='paCate' name="productAddCategory">
+    <?php foreach($category as $key => $name): ?>
+    <option value="<?php echo $name['category_id']; ?>"><?php echo $name['categoryname'];?></option>
+    <?php endforeach; ?>
+    </select>
+    </div>
     
     <div class="form-group col-md-2 ">
-        <p>f</p>
-    <button type="submit" class="btn btn-primary" name="addProductSubmit">Add</button>
+    <button type="submit" class="btn btn-success" name="addProductSubmit">Add</button>
     </div>
     </div>
 </form>
-<form action="?" method="POST" enctype="multipart/form-data" style="display:<?php echo $paF; ?> ;">
-        <input type="file" name="file" id="file">
-        <input type="submit" name="submit_img" value="submit">
-</form>
-
 <!-- End Of Add Product Form -->
-<br><br>
+
 
 
 <!-- End Of add product button -->
 
 <!-- Products Information Table -->
-<table class="table">
-    <tr class='bg-warning'>
+<div class="container">
+<table class="table" style="display:<?php echo $ptF; ?> ;">
+<h1 style="display:<?php echo $ptF; ?> ;">Products Information</h1>
+    <tr class='' style="background-color:pink;">
         <td>Id</td>
         <td>Product name</td>
         <td>Image</td>
@@ -376,7 +521,7 @@ include 'include/header.php';
         <td>Delete</td>
     </tr>
     
-        <?php foreach($products as $product): ?>
+        <?php foreach(array_reverse($products) as $product): ?>
         <?php
         // Delete product condition
         if ($product['delet'] == 1) {
@@ -407,9 +552,9 @@ include 'include/header.php';
         ?>
         <?php endforeach; ?>
 </table>
+</div>
 <!-- End Of Products Information Table -->
 
-<br><br>
 
 <!-- Update Product Info Form -->
 <form action="admin.php" method="POST" class="container" style="display:<?php echo $pF; ?> ;">
@@ -436,7 +581,7 @@ include 'include/header.php';
     </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" name="productUpdatesubmit">Update</button>
+    <button type="submit" class="btn btn-info" name="productUpdatesubmit">Update</button>
 </form>
 <!-- End Of Update Product Info Form -->
 
@@ -447,12 +592,9 @@ include 'include/header.php';
 ////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 <!-- categories Information Table -->
-<form action="admin.php" method="POST">
-<h1>Categories Information</h1>
-<button class="btn bg-secondary" type="submit" name="addCatSub">Add Category</button>
-</form>
-<br>
-<table class="table" >
+<div class="container">
+<table class="table" style="display:<?php echo $ctF; ?> ;">
+<h1 style="display:<?php echo $ctF; ?> ;">Categories Information</h1>
     <tr class='' style='background-color:pink;'>
         <th>ID</th>
         <th>Category Name</th>
@@ -491,10 +633,10 @@ include 'include/header.php';
         <?php endforeach; ?>
     
 </table>
+</div>
 <!-- End Of categories Information Table -->
 
 
-<br><br>
 
 <!-- Update Categories Info Form -->
 <form class="container" action="admin.php" method="POST" style="display:<?php echo $cF; ?> ;">
@@ -506,7 +648,7 @@ include 'include/header.php';
     <br>
     </div>
     <div class="col-md-2 offset-col-4">
-    <button type="submit" class="btn btn-success" name="updateCatSubmit">Update</button>
+    <button type="submit" class="btn btn-primary" name="updateCatSubmit">Update</button>
     </div>
 </form>
 <!-- End Of Update Categories Info Form -->
@@ -527,12 +669,12 @@ include 'include/header.php';
 </form>
 <!-- End Of Add Category Form -->
 
-<br><br>
 
 <!-- Start of Sales table -->
-<h1>Sales Information</h1>
-<table class="table">
-    <tr class='bg-success'>
+<div class="container">
+<table class="table" style="display:<?php echo $stF; ?> ;">
+    <h1 style="display:<?php echo $stF; ?> ;">Sales Information</h1>
+    <tr style="background-color:pink;">
         <th>order Id</th>
         <th>Product name</th>
         <th>Image</th>
@@ -556,4 +698,5 @@ include 'include/header.php';
         ?>
         <?php endforeach; ?>
 </table>
+</div>
 <!-- End of Sales table -->

@@ -28,8 +28,44 @@
 
 /* ////////////slide show ///////// */
 .carousel{
-    width: 50%;
+    width: 80%;
+    height: 60%;
     margin: auto;
 }
+/* .card-body a{
+    font-size: 25px;
+} */
+.prodheigh img{
+    height: 35vh;
+}
+.aboutheight img{
+    height: 350px;
+}
 
+.right_header_info ul li a {
+    font-weight: 600;
 
+}
+.right_header_info {
+    margin-top: 2em;
+}
+
+.hr-theme-slash-2 {
+    display: flex;
+}
+.hr-line {
+      width: 100%;
+      position: relative;
+      margin: 15px;
+      border-bottom: 1px solid #000;
+}
+.hr-icon {
+      position: relative;
+      top: 3px;
+      color: #363062;
+      font-size: 2em;
+}
+.form-row label{
+    color: #363062;
+    font-weight: 600;
+}

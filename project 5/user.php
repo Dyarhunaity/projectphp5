@@ -35,7 +35,12 @@ if (isset($_POST['cart']) && $orderF == 'none') {
 }
 include 'include/header.php';
 ?>
-
+<div class="hr-theme-slash-2">
+  <div class="hr-line"></div>
+  <div class="hr-icon"><i class="fa-solid fa-couch"></i></div>
+  <div class="hr-line"></div>
+</div>
+<br>
 <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 mapimg">

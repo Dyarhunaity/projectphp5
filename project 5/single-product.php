@@ -92,7 +92,12 @@
 include('include/header.php');
 
 ?>
-
+<div class="hr-theme-slash-2">
+  <div class="hr-line"></div>
+  <div class="hr-icon"><i class="fa-solid fa-couch"></i></div>
+  <div class="hr-line"></div>
+</div>
+<br>
     <?php 
     // if(isset($getProductData) && is_array($getProductData)){
     if(isset($product[0]) && is_array($product[0])){

@@ -1,7 +1,11 @@
 <?php
 session_start();
- include 'include/header.php'; ?>
-<br>
+include 'include/header.php'; ?>
+<div class="hr-theme-slash-2">
+  <div class="hr-line"></div>
+  <div class="hr-icon"><i class="fa-solid fa-couch"></i></div>
+  <div class="hr-line"></div>
+</div>
 <div class="contactus">
    <div class="container-fluid">
       <div class="row">
@@ -13,8 +17,6 @@ session_start();
       </div>
    </div>
 </div>
-
-
 
 <div class="container">
    <!--Section: Contact v.2-->
@@ -29,7 +31,7 @@ session_start();
 
          <!--Grid column-->
          <div class="col-md-9 mb-md-0 mb-5">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+            <form id="contact-form" name="contact-form" action="" method="POST">
 
                <!--Grid row-->
                <div class="row">
@@ -84,7 +86,8 @@ session_start();
             </form>
 
             <div class="text-center text-md-left">
-               <a class="btn btn-secondary btn-lg text-light" onclick="document.getElementById('contact-form').submit();">Send</a>
+               <a class="btn btn-secondary btn-lg text-light" onclick="document.getElementById('contact-form').submit(alert('Thank You For Contacting With Us, We Will Get Back To You Shortly')
+);">Send</a>
             </div>
             <div class="status"></div>
          </div>
@@ -114,43 +117,19 @@ session_start();
    <!--Section: Contact v.2-->
 </div>
 
-
-
-
 <!-- map -->
-<!-- <div class="contact">
-         <div class="container-fluid padddd">
-           
-            <div class="row">
-               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 padddd">
-                <div class="map_section">
-                     <div id="map">
-                     </div>
-                   </div>
+<div class="contact">
+   <div class="container padddd">
+      <div class="row">
+         <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 padddd">
+            <div class="map_section">
+               <div id="map">
                </div>
-               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 padddd">
-                <form class="main_form">
-                   <div class="row">
-                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                         <input class="form-control" placeholder="Name" type="text" name="Name">
-                      </div>
-                       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                         <input class="form-control" placeholder="Email" type="text" name="Email">
-                      </div>
-                       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                         <input class="form-control" placeholder="Phone" type="text" name="Phone">
-                      </div>
-                       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                         <textarea class="textarea" placeholder="Message" type="text" name="Message"></textarea>
-                      </div>
-                       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                         <button class="send">Send</button>
-                      </div>
-                   </div>
-                </form>
-               </div> 
             </div>
          </div>
-      </div> -->
+      </div>
+   </div>
+</div>
+<br>
 <!-- end map -->
 <?php include 'include/footer.php'; ?>

@@ -18,7 +18,7 @@
 	$metaDesc = 'Demo PHP Shopping cart - Add to cart using Session';
 	
     include('./include/header.php');
-
+    
     //pre($_SESSION);
     if (isset($_POST['remove'])) {
         $id=$_POST['idToRemove'];
@@ -34,13 +34,20 @@
         $handle->execute();
     }
 ?>
+<div class="hr-theme-slash-2">
+  <div class="hr-line"></div>
+  <div class="hr-icon"><i class="fa-solid fa-couch"></i></div>
+  <div class="hr-line"></div>
+</div>
+<br>
+<div class="container">
 <div class="row">
     <div class="col-md-12">
         <?php if(empty($Products)){?>
         <table class="table">
             <tr>
                 <td>
-                    <p>Your cart is emty</p>
+                    <h3>Your cart is emty</h3>
                 </td>
             </tr>
         </table>
@@ -115,5 +122,6 @@
         <br>
         <?php endif; ?>
     </div>
+</div>
 </div>
 <?php include('include/footer.php');?>

@@ -157,7 +157,7 @@ a,
 }
 
 img {
-	margin-left: -3%;
+	/* margin-left: -3%; */
 	width: 103%;
 	height: auto;
 }
@@ -1769,9 +1769,9 @@ left: -8px;
 }
 
 
-.header {
-	background: #e8e9e9;
-	padding: 35px 0px;
+.headernav {
+	/* background: #e8e9e9; */
+	padding: 15px 0px;
 }
 
 .logo a {
@@ -2225,15 +2225,15 @@ text-align: center;
 
 
 .about {padding: 90px 0;}
-.about .aboutimg figure {margin: 0;}
+/* .about .aboutimg figure {margin: 5em;} */
 .about .aboutimg figure img {width: 100%;}
 .about .aboutimg h3 {
 font-size: 45px;
 line-height: 50px;
-padding-top: 105px;
+/* padding-top: 105px; */
 font-weight: 500;
 }
-.about .aboutimg p {color: #000; font-size: 17px; line-height: 23px; padding-top: 10px;}
+.about .aboutimg p {color: #000; font-size: 17px; line-height: 35px; padding-top: 10px;}
 .about .aboutimg a {
 	max-width: 152px;
 background: #000;

@@ -1,25 +1,28 @@
 <?php
 session_start();
-
 include 'config/config.php';
+$product_id=$_SESSION['product_id'];
 function setComments($db)
 {
   if(isset($_POST['CommentSubmit'])){
-//    $u_id=$_POST['c_id'];
    $user_name=$_POST['userName'];
-//    $date=$_POST['date'];
+   $product_id=$_SESSION['product_id'];
    $msg=$_POST['msg'];
 
-   $sql="INSERT INTO comment (user_name,comment_text) VALUES ('$user_name','$msg');";
+   $sql="INSERT INTO comment (user_name,comment_text,product_id) VALUES ('$user_name','$msg','$product_id');";
    $result= $db->prepare($sql);
    $result->execute();
 
   }
 }
+$sql1="SELECT * FROM comment";
+$result= $db->prepare($sql1);
+$result->execute();
+$row = $result->fetchAll(PDO::FETCH_ASSOC);
 
 function GetComments($db)
 {
-   $product_id=$_SESSION['product_id'];
+  $product_id=$_SESSION['product_id'];
    $sql1="SELECT * FROM comment";
    $result= $db->prepare($sql1);
    $result->execute();
