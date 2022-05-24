@@ -94,6 +94,16 @@ include('include/header.php');
 
 ?>
 <?php if(isset($product[0]) && is_array($product[0])){?>
+    <?php if(isset($successMsg) && $successMsg == true){?>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="alert alert-success alert-dismissible">
+                         <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <img src="<?php echo $product[0]['image']; ?>" class="rounded img-thumbnail mr-2" style="width:40px;"><?php echo $product[0]['pname']?> is added to cart. <a href="cart.php" class="alert-link">View Cart</a>
+                    </div>
+                </div>
+            </div>
+         <?php }?>
             <div class="layout_padding-2">
                 <div class="container">
                     <div class="row">
