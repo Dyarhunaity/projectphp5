@@ -39,7 +39,7 @@ include 'include/header.php'; ?>
                   <!--Grid column-->
                   <div class="col-md-6">
                      <div class="md-form mb-0">
-                        <input type="text" id="name" name="name" class="form-control">
+                        <input type="text" id="name" name="name" class="form-control" required>
                         <label for="name" class="">Your name</label>
                      </div>
                   </div>
@@ -48,7 +48,7 @@ include 'include/header.php'; ?>
                   <!--Grid column-->
                   <div class="col-md-6">
                      <div class="md-form mb-0">
-                        <input type="text" id="email" name="email" class="form-control">
+                        <input type="text" id="email" name="email" class="form-control" required>
                         <label for="email" class="">Your email</label>
                      </div>
                   </div>
@@ -61,7 +61,7 @@ include 'include/header.php'; ?>
                <div class="row">
                   <div class="col-md-12">
                      <div class="md-form mb-0">
-                        <input type="text" id="subject" name="subject" class="form-control">
+                        <input type="text" id="subject" name="subject" class="form-control" required>
                         <label for="subject" class="">Subject</label>
                      </div>
                   </div>

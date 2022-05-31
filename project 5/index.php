@@ -18,7 +18,7 @@ include 'include/header.php'; ?>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mapimg">
                     <div class="text-bg text-h1">
                         <h1>The latest <br> <strong class="black_bold ">furniture Design</strong><br></h1>
-                        <a href="#">Shop Now <i class='fa fa-angle-right'></i></a>
+                        <a href="main.php">Shop Now <i class='fa fa-angle-right'></i></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -30,31 +30,7 @@ include 'include/header.php'; ?>
         </div>
     </div>
 </section>
-<br>
 <!-- end header -->
-<!--start slide show-->
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="./images/sliderphoto/livingslide.png" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="./images/sliderphoto/officeslide.png" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="./images/sliderphoto/bedslide.png" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<!-- end slideshow -->
 <!-- trending -->
 <div class="trending">
     <div class="container-fluid">
@@ -122,44 +98,6 @@ include 'include/header.php'; ?>
                 </div>
             </div>
         </div>
-        <!-- <<div class="carousel-item">
-                            <div class="container">
-                                <div class="carousel-caption text  carsol">
-                                    <div class="row">
-                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
-                                            <div class="img_bg">
-                                                <h3>50% DISCOUNT<br> <strong class="black_nolmal">the latest collection</strong></h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                                            <div class="img_bg">
-                                                <figure><img src="https://static.dezeen.com/uploads/2020/06/jak-studio-sofa-working-pod-design_dezeen_2364_hero-2.gif" /></figure>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div> -->
-        <!-- <div class="carousel-item">
-                            <div class="container">
-                                <div class="carousel-caption text  carsol">
-                                    <div class="row">
-                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
-                                            <div class="img_bg">
-                                                <h3>50% DISCOUNT<br> <strong class="black_nolmal">the latest collection</strong></h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                                            <div class="img_bg">
-                                                <figure><img src="images/discount.jpg" /></figure>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div> -->
     </div>
     <!-- </div> -->
 </div>
@@ -179,14 +117,14 @@ include 'include/header.php'; ?>
                         <img class='card-img-top' src='".$imgUrl."' alt='".$product['pname']."'>
                     </a>
                     <div class='card-body'>
-                        <h5 class='card-title'>
+                        <h4 class='card-title'>
                             <a href='single-product.php?product=".$product['id']."'>
                                 ".$product['pname']."
                             </a>
-                            </h5><span class='product_price'>JD".$product['new_price']."</span>
+                            </h4><span class='product_price'>JD".$product['new_price']."</span>
                                 <span class ='old-price' STYLE='text-decoration:line-through'>JD".$product['price']."</span>
                                 <p class='card-text'>
-                            <a href='single-product.php?product=".$product['id']."' class='btn btn-primary btn-sm'>
+                            <a href='single-product.php?product=".$product['id']."' class='btn btn-secondary btn-sm'>
                                 View
                             </a>
                         </p>
@@ -201,7 +139,30 @@ include 'include/header.php'; ?>
 <br><br>
 <!-- End sale show -->
 <!-- end discount -->
-
+<!--start slide show-->
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="./images/sliderphoto/livingslide.png" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./images/sliderphoto/officeslide.png" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./images/sliderphoto/bedslide.png" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<br>
+<!-- end slideshow -->
 <!-- 
 <div class="card mb-3">
   <img src="https://i.gifer.com/HZ4J.gif" class="card-img-top" alt="...">

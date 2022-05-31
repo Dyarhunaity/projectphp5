@@ -29,7 +29,9 @@ We have built an E-commerce Web Application using PHP and MYSQL.
    * [Mockup & Wireframe Link](https://www.figma.com/file/95vfzZOuKW7cjjFXninoOK/Untitled?node-id=0%3A1)
 
 1. Project Folder
-   * [Repo Link](https://github.com/Dyarhunaity/projectphp5)
+   * [Repo Link](https://github.com/Dua-Alsafasfeh/project5-E-commerce)
 
 1. Trello Link 
    * [Trello Link](https://trello.com/b/AlGGQN6M/furniture)
+
+ <a href='https://archiveprogram.github.com/'><img src='https://raw.githubusercontent.com/acervenky/animated-github-badges/master/assets/acbadge.gif' width='40' height='40'></a> 

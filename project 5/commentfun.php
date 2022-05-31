@@ -12,7 +12,6 @@ function setComments($db)
    $sql="INSERT INTO comment (user_name,comment_text,product_id) VALUES ('$user_name','$msg','$product_id');";
    $result= $db->prepare($sql);
    $result->execute();
-
   }
 }
 $sql1="SELECT * FROM comment";

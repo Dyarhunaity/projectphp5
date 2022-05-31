@@ -9,12 +9,14 @@ $checkemailexist=mysqli_fetch_all(mysqli_query($conn,'SELECT * FROM users'),MYSQ
 
 
 // regular expressions
-$pwd_expression = "/(^[A-Z])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/";
-$ps_regex = "/^[A-Z](?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/";
+// $pwd_expression = "/(^[A-Z])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/";
+$pwd_expression = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/";
+// $ps_regex = "/^[A-Z](?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/";
 $letters = "/(^[A-Z][a-z]+)(\s)([A-Z][a-z]+)(\s)([A-Z][a-z]+)(\s)([A-Z][a-z]+)/";
 $filter = "/([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/";
-$pfilter = "/[0-9]{14}/";
-$newLetters = "/(^[A-Z][a-z]+)/";
+$pfilter = "/[0-9]{10}/";
+// $newLetters = "/(^[A-Z][a-z]+)/";
+$newLetters = "/^[A-Za-z]+$/";
 
 $fn = $ln = $em = $ad = $ps = $cps = $tl = $bd = $lp = $le = "none";
 
@@ -37,7 +39,7 @@ if (isset($_POST["signup"])) {
         $fn = "block";
     } else if (!preg_match($newLetters, $_POST["fName"])) {
 
-        $fnErr = "the name should be like this: Joe";
+        $fnErr = "First Name must contain alphabet characters";
         $fn = "block";
     }
 
@@ -47,7 +49,7 @@ if (isset($_POST["signup"])) {
         $lnErr = "please insert your last name ";
         $ln = "block";
     } else if (!preg_match($newLetters, $_POST["lName"])) {
-        $lnErr = "the name should be like this: Joe";
+        $lnErr = "Last Name must contain alphabet characters";
         $ln = "block";
     }
 
@@ -58,16 +60,16 @@ if (isset($_POST["signup"])) {
          $em="block";
      }
      // for dublicate email check
-     else if (!empty($_POST["registerEmail"]))
-     {
-       foreach ($checkemailexist as $key => $email){
-         if ($_POST["registerEmail"] == $email['email']) {
-           $emailErr="This Email already exist";
-           $em="block";
-           break;
-         }
-       }
-     }
+    //  else if (!empty($_POST["registerEmail"]))
+    //  {
+    //    foreach ($checkemailexist as $key => $email){
+    //      if ($_POST["registerEmail"] == $email['email']) {
+    //        $emailErr="This Email already exist";
+    //        $em="block";
+    //        break;
+    //      }
+    //    }
+    //  }
      else if (!preg_match($filter, $_POST["registerEmail"]))
      {
          $emailErr="Email should be like this: test@test.com";
@@ -100,8 +102,8 @@ if (isset($_POST["signup"])) {
     else if (empty($_POST["registerPass"])) {
         $passwordErr = "Please insert your Password";
         $ps = "block";
-    } else if (!preg_match($ps_regex, $_POST["registerPass"])) {
-        $passwordErr = "password must start with capital letter and be at least 8 charectes, and contain minimum of 1 number,small letter,special charecter,";
+    } else if (!preg_match($pwd_expression, $_POST["registerPass"])) {
+        $passwordErr = "Upper case, Lower case, Special character and Numeric letter are required in Password filed";
         $ps = "block";
     }
 
@@ -129,14 +131,13 @@ if (isset($_POST["signup"])) {
         $phone = $_POST["phoneNumber"];
         $city = $_POST['city'];
         $addres = $_POST['address'];
-        $password = $_POST["registerPass"];
+        $password =md5($_POST["registerPass"]) ;
         $bdate = $_POST["date"];
-
-        $sql = "INSERT INTO users (fname, lname, email, phone, city, addres, pass, bdate) 
+        $sqlr="INSERT INTO users (fname, lname, email, phone, city, addres, pass, bdate) 
                 VALUES('$fname','$lname','$email','$phone','$city','$addres','$password','$bdate')";
-        mysqli_query($conn, $sql);
+        mysqli_query($conn, $sqlr);
 
-        // header("location: login.php");
+        header("location: login.php");
     }
 }
 
@@ -163,14 +164,18 @@ include 'include/header.php';
             <div class="form-row">
                 <div class="col-md-2 offset-md-4">
                     <label for="validationCustom01">First Name</label>
-                    <input type="text" class="form-control is-inavalid" id="validationCustom01" name="fName" placeholder="First Name" class="loginBox" required>
+                    <input type="text" class="form-control is-inavalid" id="validationCustom01" name="fName" placeholder="First Name" class="loginBox" value="<?php if (isset($_POST['fName'])) {
+                                                                                                    echo $_POST['fName'];
+                                                                                                } ?>" required>
                     <div class="invalid-feedback" style="display:<?php echo $fn ?>">
                         <?php echo $fnErr ?>
                     </div>
                 </div>
                 <div class="col-md-2 ">
                     <label for="validationCustom02">Last Name</label>
-                    <input type="text" class="form-control is-inavalid" id="validationCustom02" name="lName" placeholder="Last Name" class="loginBox" required>
+                    <input type="text" class="form-control is-inavalid" id="validationCustom02" name="lName" placeholder="Last Name" class="loginBox" value="<?php if (isset($_POST['lName'])) {
+                                                                                                    echo $_POST['lName'];
+                                                                                                } ?>" required>
                     <div class="invalid-feedback" style="display:<?php echo $ln ?>">
                         <?php echo $lnErr ?>
                     </div>
@@ -180,7 +185,9 @@ include 'include/header.php';
                 <div class="col-md-4 offset-md-4">
                     <label for="validationemail">Email</label>
                     <div class="input-group">
-                        <input type="email" class="form-control is-inavalid" id="validationemail" name="registerEmail" placeholder="test@test.com" aria-describedby="inputGroupPrepend" class="loginBox" required>
+                        <input type="email" class="form-control is-inavalid" id="validationemail" name="registerEmail" placeholder="test@test.com" aria-describedby="inputGroupPrepend" class="loginBox" value="<?php if (isset($_POST['registerEmail'])) {
+                                                                                                    echo $_POST['registerEmail'];
+                                                                                                } ?>" required>
                         <div class="invalid-feedback" style="display:<?php echo $em ?>">
                             <?php echo $emailErr ?>
                         </div>
@@ -191,7 +198,9 @@ include 'include/header.php';
                 <div class="col-md-4 offset-md-4">
                     <label for="validationemail">Phone</label>
                     <div class="input-group">
-                        <input type="number" class="form-control is-inavalid" id="validationemail" name="phoneNumber" placeholder="0777777777" aria-describedby="inputGroupPrepend" pattern="[0-9]{10}" class="loginBox" required>
+                        <input type="number" class="form-control is-inavalid" id="validationemail" name="phoneNumber" placeholder="0777777777" aria-describedby="inputGroupPrepend" pattern="[0-9]{10}" class="loginBox" value="<?php if (isset($_POST['phoneNumber'])) {
+                                                                                                    echo $_POST['phoneNumber'];
+                                                                                                } ?>" required>
                         <div class="invalid-feedback" style="display:<?php echo $tl ?>">
                             <?php echo $telErr ?>
                         </div>
@@ -208,12 +217,12 @@ include 'include/header.php';
                         <option value="Aqaba">Aqaba</option>
                         <option value="Maan">Maan</option>
                         <option value="Irbid">Irbid</option>
-                        <option value="Zarqa">Zarqa</option>
+                        <option value="Zarqa">Zarqaa</option>
                         <option value="Ajloun">Ajloun</option>
                         <option value="Jarash">Jarash</option>
                         <option value="Al-Mafraq">Al-Mafraq</option>
-                        <option value="Al-Tafeela">Al-Tafeela</option>
-                        <option value="El-Karak">El-Karak</option>
+                        <option value="Al-Tafeela">Al-Tafila</option>
+                        <option value="El-Karak">Al-Karak</option>
                         <option value="Madaba">Madaba</option>
                         <option value="Al-Salt">Al-Salt</option>
                     </select>
@@ -222,7 +231,9 @@ include 'include/header.php';
             <div class="form-row">
                 <div class="col-md-4 offset-md-4">
                     <label for="validationCustom03">Address</label>
-                    <input type="text" class="form-control is-inavalid" id="validationCustom03" name="address" placeholder="Address" required>
+                    <input type="text" class="form-control is-inavalid" id="validationCustom03" name="address" placeholder="Address" value="<?php if (isset($_POST['address'])) {
+                                                                                                    echo $_POST['address'];
+                                                                                                } ?>" required>
                     <div class="invalid-feedback" style="display:<?php echo $ad ?>">
                         <?php echo $adErr ?>
                     </div>
@@ -249,7 +260,9 @@ include 'include/header.php';
                 <div class="col-md-4 offset-md-4">
                     <label for="validationbdate">Birthdate</label>
                     <div class="input-group">
-                        <input type="date" class="form-control is-inavalid" id="validationbdate" name="date" placeholder="" aria-describedby="inputGroupPrepend" class="loginBox" required>
+                        <input type="date" class="form-control is-inavalid" id="validationbdate" name="date" placeholder="" aria-describedby="inputGroupPrepend" class="loginBox" value="<?php if (isset($_POST['date'])) {
+                                                                                                    echo $_POST['date'];
+                                                                                                } ?>" required>
                         <div class="invalid-feedback" style="display:<?php echo $bd ?>">
                             <?php echo $dateErr ?>
                         </div>

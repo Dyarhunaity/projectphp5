@@ -50,7 +50,7 @@ if (isset($_POST['deleteCatSub'])) {
     $updateat=date('d-m-Y');
     $sql="UPDATE category
           SET delet=1,updated_at='$updateat'
-          WHERE id=$dcat;";
+          WHERE category_id=$dcat;";
     mysqli_query($conn,$sql);
 }
 
@@ -111,7 +111,7 @@ if (isset($_POST['updateCatSub'])) {
     $catToUpdate=$_POST['updateCat'];
     $sql="UPDATE category
     SET updat=1
-    WHERE id=$catToUpdate;";
+    WHERE category_id=$catToUpdate;";
     mysqli_query($conn,$sql);
 }
 if (isset($_POST['updateCatSubmit'])) 
@@ -157,7 +157,7 @@ if (isset($_POST['addProductSubmit'])) {
     $newCategory=$_POST['productAddCategory'];
     $newPrice=$_POST['productAddPrice'];
     $newQuantity=$_POST['productAddQuantity'];
-     echo $newName.$newCategory.$newPrice.$newQuantity;
+    //  echo $newName.$newCategory.$newPrice.$newQuantity;
 $sqla="INSERT INTO `products` (pname,category_id,image,price,quantity) VALUES ('$newName','$newCategory','$file_store','$newPrice','$newQuantity');";
 mysqli_query($conn,$sqla);
 }
@@ -170,7 +170,7 @@ if (isset($_POST['addCatSubmit'])) {
     $newName=$_POST['catAddName'];
 $sql="INSERT INTO category (categoryname) VALUES ('$newName');";
 mysqli_query($conn,$sql);
-echo $newName;
+// echo $newName;
 }
 
 
@@ -486,7 +486,7 @@ switch ($_POST['tables']) {
     </div>
     <div class="form-group col-md-2">
     <label for="paCate">Product Category</label>
-    <select id='paCate' name="productAddCategory">
+    <select id='paCate' name="productAddCategory" style="height: 4.3vh; width:8vw">
     <?php foreach($category as $key => $name): ?>
     <option value="<?php echo $name['category_id']; ?>"><?php echo $name['categoryname'];?></option>
     <?php endforeach; ?>

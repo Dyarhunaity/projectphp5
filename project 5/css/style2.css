@@ -32,12 +32,10 @@
     height: 60%;
     margin: auto;
 }
-/* .card-body a{
-    font-size: 25px;
-} */
 .prodheigh img{
     height: 35vh;
 }
+
 .aboutheight img{
     height: 350px;
 }
@@ -69,3 +67,15 @@
     color: #363062;
     font-weight: 600;
 }
+.card-body{
+    text-align: center;
+}
+.userpro{
+    width: fit-content;
+}
+.product_price{
+    color: #363062;
+}
+/* .card{
+    width: 12vw;
+} */
